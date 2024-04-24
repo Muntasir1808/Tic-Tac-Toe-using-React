@@ -5,13 +5,16 @@ export default function Player({name, symbol}) {
     const [ isEditing, setIsEditing ] = useState(false);
 
     function handleEditClick() {
-        setIsEditing(true);
+        setIsEditing(!isEditing);
     }
 
     let playerName = <span className="player-name">{name}</span>;
+    // let btnCaption = 'Edit';
+    // without using btnCaption like flag we can also use ternary expression
 
     if (isEditing) {
-        playerName = <input type='text' required/>
+        playerName = <input type='text' required value={name}/>
+        // btnCaption='Save'
     }
     return (
       <li>
@@ -19,7 +22,7 @@ export default function Player({name, symbol}) {
          {playerName}
           <span className="player-symbol">{symbol}</span>
         </span>
-        <button onClick={handleEditClick}>Edit</button>
+        <button onClick={handleEditClick}>{isEditing ? 'Save': 'Edit'}</button>
       </li>
     );
 }
